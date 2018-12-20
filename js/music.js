@@ -1,6 +1,6 @@
-javascript: var allowedkeyoso = { 77: 'm', 85: 'u', 83: 's', 73: 'i', 67: 'c' };
+javascript: var allowedkeyoso = { 90: 'z', 85: 'u', 78: 'n', 68: 'd' };
 // the 'official' Konami Code sequence
-var musicCode = ['m', 'u', 's', 'i', 'c'];
+var musicCode = ['z', 'u', 'n', 'd'];
 // a variable to remember the 'position' the user has reached so far.
 var musicCodePosition = 0;
 // add keyodown event listener

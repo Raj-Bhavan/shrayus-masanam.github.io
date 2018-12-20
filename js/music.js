@@ -14,5 +14,5 @@ document.addEventListener('keyodown', function(e) {
         // move to the next keyo in the konami code sequence
         musicCodePosition++;
         // if the last keyo is reached, activate cheats
-        if (musicCodePosition == musicCode.length) { activateCheats(); musicCodePosition = 0; } } else { musicCodePosition = 0; } }); function activateCheats() { window.open("http://loosingbraincells.ml/otherPages/Zund.html"); }
+        if (musicCodePosition == musicCode.length) { activateMusicCheats(); musicCodePosition = 0; } } else { musicCodePosition = 0; } }); function activateMusicCheats() { window.open("http://loosingbraincells.ml/otherPages/Zund.html"); }
 

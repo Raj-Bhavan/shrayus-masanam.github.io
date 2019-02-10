@@ -77,12 +77,25 @@ h3 {
 </head>
 <body>
 <br>
-<div id="navbar">
+<div id="navig">
   <a class="active" href="javascript:void(0)">Home</a>
   <a href="javascript:void(0)">News</a>
   <a href="javascript:void(0)">Contact</a>
 </div>
-<script src="https://www.loosingbraincells.ml/js/stickEdu.js"></script>
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navig");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
 <div class="bgimg-1">
   <div class="caption">
   <span class="border">IT'S TIME TO LEARN</span>

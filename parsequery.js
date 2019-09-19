@@ -1,3 +1,3 @@
 var link = window.location.href;
 var content = link.split("=").pop();
-alert(content);
+document.body.innerHTML = "Your string is:\n\n" + content;

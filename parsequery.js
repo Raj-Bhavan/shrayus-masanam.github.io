@@ -1,3 +1,3 @@
-var link = toString(window.location);
+var link = window.location.href;
 var content = link.split("=").pop();
 alert(content);

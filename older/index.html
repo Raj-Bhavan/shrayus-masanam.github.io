@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://www.loosingbraincells.ml/js/secureEduIndex.js"></script>
+<link rel="stylesheet" type="text/css" href="https://www.loosingbraincells.ml/css/stickEdu.css">
+<style>
+a {
+	color: white;
+}
+#special {
+	color: #000;
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.7;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  background-image: url("img_parallax.jpg");
+  min-height: 100%;
+}
+
+.bgimg-2 {
+  background-image: url("img_parallax2.jpg");
+  min-height: 400px;
+}
+
+.bgimg-3 {
+  background-image: url("img_parallax3.gif");
+  min-height: 400px;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: scroll;
+  }
+}
+</style>
+<title>Tutorials - loosingbraincells.ml</title>
+</head>
+<body>
+<div id="navbar">
+  <a class="active" href="https://edu.loosingbraincells.ml">Home</a>
+  <a href="#">HTML Tutorials</a>
+  <a href="#">Scratch Tutorials</a>
+</div>
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+<div class="bgimg-1">
+  <div class="caption">
+  <span class="border">IT'S TIME TO LEARN</span>
+  </div>
+</div>
+
+<div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
+  <h3 style="text-align:center;">WHAT IS THIS WEBSITE?</h3>
+  <p>The website <a id="special" href="https://www.loosingbraincells.ml/" target="_blank">https://www.loosingbraincells.ml/</a> was originally just a website to place HTML, CSS, and JavaScript code for fun, but after people wanted to know how I made those things, I decided to start this website with a friend to teach people how to make cool web-based projects.</p>
+</div>
+
+<div class="bgimg-2">
+  <div class="caption">
+  <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">&ltHTML></span>
+  </div>
+</div>
+
+<div style="position:relative;">
+  <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+  <p>HTML is the most popular and most simple web programming language.  With HTML, you can make some static pages.  With the help of CSS, you can style it and make it look nice.  With JavaScript, you can make it interactive.  There is so much more you can do, too.  Even this page is made with HTML and CSS!</p>
+  </div>
+</div>
+
+<div class="bgimg-3">
+  <div class="caption">
+  <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">SCRATCH</span>
+  </div>
+</div>
+
+<div style="position:relative;">
+  <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+  <p><a href="https://scratch.mit.edu" target="_blank">Scratch</a> is a block-based programming language developed at <a href="https://mit.edu" target="_blank">MIT University</a>.  With Scratch 3.0 released, you can embed your own games, calculators, and more into HTML5. Visit my partner's website at <a href="https://zund.cf" target="_blank">https://zund.cf</a> where he showcases his own Scratch Projects.</p>
+  </div>
+</div>
+
+<div class="bgimg-1">
+  <div class="caption">
+  <span class="border">COMING SOON</span>
+  </div>
+</div>
+
+</body>
+
+</html>

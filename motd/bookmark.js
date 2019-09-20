@@ -1,0 +1,2 @@
+var motd;
+alert(motd);

@@ -1,3 +1,6 @@
+var jQ = document.createElement(`script`);
+jQ.src = `https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js`;
+document.head.appendChild(jQ);
 function getHash(str) {
     var hash = 0;
     for (var i = 0; i < str.length; i++) {

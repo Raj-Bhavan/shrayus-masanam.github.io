@@ -1,6 +1,6 @@
 /*
 	Copyright (c) <2011, 2012> Rootof Creations HB, rootof.com, kickassapp.com
-*/(function(window) {
+*/var KICKASSVERSION='2.0';(function(window) {
 var JSONP=(function(){var counter=0,head,query,key,window=this;function load(url){var script=document.createElement('script'),done=false;script.src=url;script.async=true;script.onload=script.onreadystatechange=function(){if(!done&&(!this.readyState||this.readyState==="loaded"||this.readyState==="complete")){done=true;script.onload=script.onreadystatechange=null;if(script&&script.parentNode){script.parentNode.removeChild(script);}}};if(!head){head=document.getElementsByTagName('head')[0];if(!head)
 head=document.body;}
 head.appendChild(script);}

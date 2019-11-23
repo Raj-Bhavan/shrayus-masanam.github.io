@@ -1,1 +1,1 @@
-# Hi I'm Shrayus and these are my (mcps friendly) HTML/CSS/JS projects
+# Hi I'm Shrayus and these are my (MCPS friendly) HTML/CSS/JS projects

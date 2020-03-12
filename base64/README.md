@@ -11,5 +11,5 @@ Add the bookmark, and when you click on it while on any https website, the scrip
 To install on Chrome, right click on the bookmarks bar and press add page.  Give it any title, and for the URL enter the following:
 
 ``` 
-javascript: var s = document.createElement("script"); s.src = "https://shrayus-masanam.github.io/base64/bookmark.js"; document.body.appendChild(s);
+javascript:let s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/base64/bookmark.js`;document.body.appendChild(s);
 ```

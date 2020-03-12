@@ -1,6 +1,5 @@
-// Aiming for a better MCPS Powerschool
 document.head.innerHTML=``;
-document.body.innerHTML=`<input id="jsonNum"></input><button onclick='document.getElementById("dump").value="";var k = 0;while (k<11) {document.getElementById("dump").value=document.getElementById("dump").value+"\\n"+window[varsToMake[k]+document.getElementById("jsonNum").value];k++;}'>Get</button><br><textarea id="dump"></textarea>`;
+document.body.innerHTML=`<input id="jsonNum"></input><button onclick='document.getElementById("dump").value="";var k = 0;while (k<11) {document.getElementById("dump").value=document.getElementById("dump").value+"\\n"+varsToMake[k]+document.getElementById("jsonNum").value+":        "+window[varsToMake[k]+document.getElementById("jsonNum").value];k++;}'>Get</button><br><textarea id="dump"></textarea>`;
 var client = new XMLHttpRequest();
 client.open('GET', 'https://portal.mcpsmd.org/guardian/prefs/gradeByCourseSecondary.json?schoolid=823');
 client.onreadystatechange = function() {

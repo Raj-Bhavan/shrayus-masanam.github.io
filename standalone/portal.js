@@ -29,8 +29,8 @@ client.onreadystatechange = function() {
         var row = table.insertRow(1);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
-        cell1.innerHTML = window["courseName"+m];
-        cell2.innerHTML = window["overallgrade"+m];
+        cell1.innerHTML = window["courseName"+m].replace(/"/g, '');
+        cell2.innerHTML = window["overallgrade"+m].replace(/"/g, '');
       }
     }
   }

@@ -1,7 +1,8 @@
 /* Aiming for a better MCPS PowerSchool */
+let mp = prompt(`"MP1", "MP2", "MP3", or "MP4"?`)
 document.head.innerHTML=`<style>table,th,td {font-family:Helvetica;border:1px solid black;border-collapse:collapse;}</style>`;
 document.body.innerHTML=`<table id="gradeTable"><tr><td><strong>Course</strong></td><td><strong>Overall Grade</strong></td></tr></table>`;
-const oldHTML = `<input id="jsonNum"></input><button onclick='document.getElementById("dump").value="";var k = 0;while (k<11) {document.getElementById("dump").value=document.getElementById("dump").value+"\\n"+varsToMake[k]+document.getElementById("jsonNum").value+":        "+window[varsToMake[k]+document.getElementById("jsonNum").value];k++;}'>Get</button><br><textarea id="dump"></textarea>`
+let oldHTML = `<input id="jsonNum"></input><button onclick='document.getElementById("dump").value="";var k = 0;while (k<11) {document.getElementById("dump").value=document.getElementById("dump").value+"\\n"+varsToMake[k]+document.getElementById("jsonNum").value+":        "+window[varsToMake[k]+document.getElementById("jsonNum").value];k++;}'>Get</button><br><textarea id="dump"></textarea>`
 attempt = true;
 var client = new XMLHttpRequest();
 client.open('GET', 'https://portal.mcpsmd.org/guardian/prefs/gradeByCourseSecondary.json?schoolid=823');
@@ -23,7 +24,7 @@ client.onreadystatechange = function() {
   if (attempt==true) {
     attempt = false;
     for (m=Object.keys(obj).length;m>-1;m--) {
-      if (window["termid"+m] == `"MP3"`) {
+      if (window["termid"+m] == mp) {
         console.log("Match!")
         var table = document.getElementById("gradeTable");
         var row = table.insertRow(1);

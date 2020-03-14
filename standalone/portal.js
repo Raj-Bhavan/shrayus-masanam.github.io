@@ -2,7 +2,7 @@
 Aiming for a better MCPS PowerSchool
 To append use javascript:let s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/standalone/portal.js`;document.body.appendChild(s);
 */
-if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only runs on portal.mcpsmd.org after logging in.`);setInterval(function(){alert(`This only runs on portal.mcpsmd.org after logging in.`);}, 999999);}
+if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only runs on portal.mcpsmd.org after logging in.`);setInterval(function(){}, 3000);}
 document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}</style>`;
 document.body.innerHTML=`<h1 id="name"></h1><select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"' selected>MP3</option><option value='"MP4"'>MP4</option></select><br><br><table id="gradeTable"><tr><td><strong>Course</strong></td><td><strong>Overall Grade</strong></td></tr></table>`;
 let m;

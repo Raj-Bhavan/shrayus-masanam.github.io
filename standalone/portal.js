@@ -1,6 +1,6 @@
 /* Aiming for a better MCPS PowerSchool */
-document.head.innerHTML=`<style>table,th,td {font-family:Helvetica;border:1px solid black;border-collapse:collapse;}</style>`;
-document.body.innerHTML=`<select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"'>MP3</option><option value='"MP4"'>MP4</option></select><br><table id="gradeTable"><tr><td><strong>Course</strong></td><td><strong>Overall Grade</strong></td></tr></table>`;
+document.head.innerHTML=`<style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}</style>`;
+document.body.innerHTML=`<h1 id="name"></h1><select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"'>MP3</option><option value='"MP4"'>MP4</option></select><br><br><table id="gradeTable"><tr><td><strong>Course</strong></td><td><strong>Overall Grade</strong></td></tr></table>`;
 let oldHTML = `<input id="jsonNum"></input><button onclick='document.getElementById("dump").value="";let k = 0;while (k<11) {document.getElementById("dump").value=document.getElementById("dump").value+"\\n"+varsToMake[k]+document.getElementById("jsonNum").value+":        "+window[varsToMake[k]+document.getElementById("jsonNum").value];k++;}'>Get</button><br><textarea id="dump"></textarea>`
 let m;
 let updateOverallGrades = function() {
@@ -35,6 +35,7 @@ client.onreadystatechange = function() {
       attempt = false;
       for (m=Object.keys(obj).length;m>-1;m--) {
         updateOverallGrades();
+        document.getElementById(`name`).innerHTML = `Term Grades for ` + student0;
       }
       m=Object.keys(obj).length;
     }

@@ -3,22 +3,22 @@ Aiming for a better MCPS PowerSchool
 To append use javascript:let s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/standalone/portal.js`;document.body.appendChild(s);
 */
 if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only runs on portal.mcpsmd.org after logging in.`);}
-document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}</style>`;
-document.body.innerHTML=`<h1 id="name"></h1><select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"' selected>MP3</option><option value='"MP4"'>MP4</option></select><br><br><table id="gradeTable"><tr><td><strong>Course</strong></td><td><strong>Overall Grade</strong></td></tr></table>`;
+document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}a{color:black;}</style>`;
+document.body.innerHTML=`<h1 id="name"></h1><select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"' selected>MP3</option><option value='"MP4"'>MP4</option></select><br><br><table id="gradeTable"><tr><td><strong><span class="courses">Course</span></strong></td><td><strong><span class="courses">Overall Grade</span></strong></td></tr></table>`;
 let m;
 let schoolId;
+overallClick = function(secid) {
+    console.log('Clicked a course, should open '+secid);
+}
 let updateOverallGrades = function() {
   if (window[`termid`+m] == document.getElementById(`mp`).value) {
     let table = document.getElementById(`gradeTable`);
     let row = table.insertRow(1);
     let cell1 = row.insertCell(0);
     let cell2 = row.insertCell(1);
-    cell1.innerHTML = `<a href="#">`+ window[`courseName`+m].replace(/"/g, '')+`</a>`;
+    cell1.innerHTML = `<a href='javascript:overallClick(`+window[`sectionid`+m]+`);''><span class="courses">`+ window[`courseName`+m].replace(/"/g, '')+`</span></a>`;
     cell2.innerHTML = window[`overallgrade`+m].replace(/"/g, '');
   }
-}
-overallClick = function() {
-    console.log('Clicked a course');
 }
 let schoolIdReq = new XMLHttpRequest();
 schoolIdReq.open(`GET`, `https://portal.mcpsmd.org/guardian/home.html`)
@@ -62,10 +62,11 @@ document.getElementById(`mp`).onchange = function() {
     let index = this.selectedIndex;
     let mpInput = this.children[index].value.trim();
     let grades = document.getElementById(`gradeTable`).children[0];
-    while(grades.children.length > 1)
+    /*while(grades.children.length > 1)
     {
       grades.removeChild(grades.children[1]);
-    }
+    } */
+    document.getElementById(`gradeTable`).innerHTML = `<table id="gradeTable"><tr><td><strong><span class="courses">Course</span></strong></td><td><strong><span class="courses">Overall Grade</span></strong></td></tr></table>`;
     for (m;m>-1;m--) {
       updateOverallGrades();
     }

@@ -1,39 +1,55 @@
 /* Aiming for a better MCPS PowerSchool */
-let mp = prompt(`"MP1", "MP2", "MP3", or "MP4"?`)
 document.head.innerHTML=`<style>table,th,td {font-family:Helvetica;border:1px solid black;border-collapse:collapse;}</style>`;
-document.body.innerHTML=`<table id="gradeTable"><tr><td><strong>Course</strong></td><td><strong>Overall Grade</strong></td></tr></table>`;
-let oldHTML = `<input id="jsonNum"></input><button onclick='document.getElementById("dump").value="";var k = 0;while (k<11) {document.getElementById("dump").value=document.getElementById("dump").value+"\\n"+varsToMake[k]+document.getElementById("jsonNum").value+":        "+window[varsToMake[k]+document.getElementById("jsonNum").value];k++;}'>Get</button><br><textarea id="dump"></textarea>`
+document.body.innerHTML=`<select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"'>MP3</option><option value='"MP4"'>MP4</option></select><br><table id="gradeTable"><tr><td><strong>Course</strong></td><td><strong>Overall Grade</strong></td></tr></table>`;
+let oldHTML = `<input id="jsonNum"></input><button onclick='document.getElementById("dump").value="";let k = 0;while (k<11) {document.getElementById("dump").value=document.getElementById("dump").value+"\\n"+varsToMake[k]+document.getElementById("jsonNum").value+":        "+window[varsToMake[k]+document.getElementById("jsonNum").value];k++;}'>Get</button><br><textarea id="dump"></textarea>`
+let m;
+let updateOverallGrades = function() {
+  if (window[`termid`+m] == document.getElementById(`mp`).value) {
+    let table = document.getElementById(`gradeTable`);
+    let row = table.insertRow(1);
+    let cell1 = row.insertCell(0);
+    let cell2 = row.insertCell(1);
+    cell1.innerHTML = window[`courseName`+m].replace(/"/g, '');
+    cell2.innerHTML = window[`overallgrade`+m].replace(/"/g, '');
+  }
+}
 attempt = true;
-var client = new XMLHttpRequest();
+let client = new XMLHttpRequest();
 client.open('GET', 'https://portal.mcpsmd.org/guardian/prefs/gradeByCourseSecondary.json?schoolid=823');
 client.onreadystatechange = function() {
   obj = JSON.parse(client.responseText);
-  var makeVarsFromResponse = function(n) {
-    var i;
+  objl = Object.keys(obj).length;
+  let makeVarsFromResponse = function(n) {
+    let i;
     for (i=0;i<Object.keys(obj).length;i++) {
       eval(n + i + ` = JSON.stringify(obj[`+i+`].`+n+`);`);
       console.log(n + i);
     }
   }
   varsToMake = [`studentid`,`student`,`courseName`,`teacher`,`email_addr`,`period`,`room`,`sectionid`,`termid`,`overallgrade`,`schoolid`];
-  var j;
+  let j;
   for(j=0;j<Object.keys(varsToMake).length+1;j++) {
     makeVarsFromResponse(varsToMake[j]);
   }
-  var m;
-  if (attempt==true) {
-    attempt = false;
-    for (m=Object.keys(obj).length;m>-1;m--) {
-      if (window["termid"+m] == mp) {
-        console.log("Match!")
-        var table = document.getElementById("gradeTable");
-        var row = table.insertRow(1);
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        cell1.innerHTML = window["courseName"+m].replace(/"/g, '');
-        cell2.innerHTML = window["overallgrade"+m].replace(/"/g, '');
+    if (attempt==true) {
+      attempt = false;
+      for (m=Object.keys(obj).length;m>-1;m--) {
+        updateOverallGrades();
       }
+      m=Object.keys(obj).length;
     }
-  }
 }
 client.send();
+document.getElementById(`mp`).onchange = function() {
+    let index = this.selectedIndex;
+    let mpInput = this.children[index].value.trim();
+    let grades = document.getElementById(`gradeTable`).children[0];
+    while(grades.children.length > 1)
+    {
+      grades.removeChild(grades.children[1]);
+    }
+    for (m;m>-1;m--) {
+      updateOverallGrades();
+    }
+    m = objl;
+}

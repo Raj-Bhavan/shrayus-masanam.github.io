@@ -4,7 +4,7 @@ An auto-updating bookmark that lets you easily encode and decode strings using b
 
 ## Installation
 
-Add the bookmark, and when you click on it while on any https website, the script will run.
+Add the bookmark, and when you click on it while on any website, the script will run.
 
 ### Google Chrome
 

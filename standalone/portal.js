@@ -6,7 +6,7 @@ To append use the folllowing in the address bar:
 javascript:(function(){s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/standalone/portal.js`;document.body.appendChild(s);})();
 
 */
-if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only runs on portal.mcpsmd.org after logging in.`);}
+if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only works on portal.mcpsmd.org after logging in.`);}
 document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}a{color:black;}</style>`;
 document.body.innerHTML=`<h1 id="name"></h1><select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"' selected>MP3</option><option value='"MP4"'>MP4</option></select><br><br><table id="gradeTable"><tr><td><strong><span class="courses">Course</span></strong></td><td><strong><span class="courses">Overall Grade</span></strong></td></tr></table>`;
 let m;

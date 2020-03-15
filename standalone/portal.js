@@ -6,13 +6,20 @@ To append use the folllowing in the address bar:
 javascript:(function(){s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/standalone/portal.js`;document.body.appendChild(s);})();
 
 */
+//https://portal.mcpsmd.org/guardian/prefs/assignmentGrade_CategoryDetail.json?secid=69070001&student_number=465732&schoolid=823&termid=MP3
 if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only works on portal.mcpsmd.org after logging in.`);}
 document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}a{color:black;}</style>`;
 document.body.innerHTML=`<h1 id="name"></h1><select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"' selected>MP3</option><option value='"MP4"'>MP4</option></select><br><br><table id="gradeTable"><tr><td><strong><span class="courses">Course</span></strong></td><td><strong><span class="courses">Overall Grade</span></strong></td></tr></table>`;
 let m;
 let schoolId;
-overallClick = function(secid) {
-    console.log('Clicked a course, should open '+secid);
+overallClick = function(secnum,idnum,schoolnum,mpnum) {
+    //console.log('Clicked a course, should open '+secid);
+    let assignmentReq = new XMLHttpRequest();
+    assignmentReq.open(`GET`, `https://portal.mcpsmd.org/guardian/prefs/assignmentGrade_CategoryDetail.json?secid=`+secnum+`&student_number=`+idnum+`&schoolid=`+schoolnum+`&termid=`+mpnum); // TODO: why does this only return MP3?
+    assignmentReq.onreadystatechange = function() {
+      console.log(assignmentReq.responseText);
+    }
+    assignmentReq.send();
 }
 let updateOverallGrades = function() {
   if (window[`termid`+m] == document.getElementById(`mp`).value) {
@@ -20,7 +27,7 @@ let updateOverallGrades = function() {
     let row = table.insertRow(1);
     let cell1 = row.insertCell(0);
     let cell2 = row.insertCell(1);
-    cell1.innerHTML = `<a href='javascript:overallClick(`+window[`sectionid`+m]+`);''><span class="courses">`+ window[`courseName`+m].replace(/"/g, '')+`</span></a>`;
+    cell1.innerHTML = `<a href='javascript:overallClick(`+window[`sectionid`+m]+`,`+window[`studentid0`]+`,`+schoolId+`,`+document.getElementById(`mp`).value.toString()+`);''><span class="courses">`+ window[`courseName`+m].replace(/"/g, '')+`</span></a>`;
     cell2.innerHTML = window[`overallgrade`+m].replace(/"/g, '');
   }
 }
@@ -42,7 +49,6 @@ schoolIdReq.onreadystatechange = function() {
       let i;
       for (i=0;i<Object.keys(obj).length;i++) {
         eval(n + i + ` = JSON.stringify(obj[`+i+`].`+n+`);`);
-        console.log(n + i);
       }
     }
     varsToMake = [`studentid`,`student`,`courseName`,`teacher`,`email_addr`,`period`,`room`,`sectionid`,`termid`,`overallgrade`,`schoolid`];
@@ -61,7 +67,7 @@ schoolIdReq.onreadystatechange = function() {
   }
   client.send();
 }
-schoolIdReq.send()
+schoolIdReq.send();
 document.getElementById(`mp`).onchange = function() {
     let index = this.selectedIndex;
     let mpInput = this.children[index].value.trim();

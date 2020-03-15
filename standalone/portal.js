@@ -11,14 +11,21 @@ document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:H
 document.body.innerHTML=`<h1 id="name"></h1><select id="mp"><option value='"MP1"'>MP1</option><option value='"MP2"'>MP2</option><option value='"MP3"' selected>MP3</option><option value='"MP4"'>MP4</option></select><br><br><table id="gradeTable"><tr><td><strong><span class="courses">Course</span></strong></td><td><strong><span class="courses">Overall Grade</span></strong></td></tr></table>`;
 let m;
 let schoolId;
+const currentTerm = `MP3` // Temporary solution
 overallClick = function(secnum,idnum,schoolnum,mpnum) {
-    //console.log('Clicked a course, should open '+secid);
-    let assignmentReq = new XMLHttpRequest();
-    assignmentReq.open(`GET`, `https://portal.mcpsmd.org/guardian/prefs/assignmentGrade_CategoryDetail.json?secid=`+secnum+`&student_number=`+idnum+`&schoolid=`+schoolnum+`&termid=`+mpnum); // TODO: why does this only return MP3?
-    assignmentReq.onreadystatechange = function() {
-      console.log(assignmentReq.responseText);
+    if(typeof window[mpnum+secnum]==`undefined`) {
+      let assignmentReq = new XMLHttpRequest();
+      let prior = ``;
+      if(mpnum!=currentTerm){prior=`_prior`;}
+      assignmentReq.open(`GET`, `https://portal.mcpsmd.org/guardian/prefs/assignmentGrade_CategoryDetail`+prior+`.json?secid=`+secnum+`&student_number=`+idnum+`&schoolid=`+schoolnum+`&termid=`+mpnum);
+      assignmentReq.onreadystatechange = function() {
+        console.log(assignmentReq.responseText);
+        eval(mpnum+secnum+`=JSON.parse(assignmentReq.responseText);`);
+      }
+      assignmentReq.send();
+    } else {
+      
     }
-    assignmentReq.send();
 }
 let updateOverallGrades = function() {
   if (window[`termid`+m] == document.getElementById(`mp`).value) {

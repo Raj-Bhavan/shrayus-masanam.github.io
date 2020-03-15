@@ -1,6 +1,10 @@
 /*
-Aiming for a better MCPS PowerSchool
-To append use javascript:let s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/standalone/portal.js`;document.body.appendChild(s);
+Aiming for a better MCPS PowerSchool. This in no way logs ANY information, check the code below for proof.
+
+To append use the folllowing in the address bar:
+
+javascript:(function(){s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/standalone/portal.js`;document.body.appendChild(s);})();
+
 */
 if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only runs on portal.mcpsmd.org after logging in.`);}
 document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}a{color:black;}</style>`;

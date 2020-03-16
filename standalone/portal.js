@@ -1,10 +1,11 @@
 /*
 Aiming for a better MCPS PowerSchool. This in no way logs ANY information, check the code below for proof.
 
-To append use the folllowing in the address bar:
+To use, log into portal.mcpsmd.org (MS and HS) and then append this script by typing the following in the address bar:
 
 javascript:(function(){s=document.createElement(`script`);s.src=`https://shrayus-masanam.github.io/standalone/portal.js`;document.body.appendChild(s);})();
 
+(if you want, you can type the same line of code without 'javascript:' at the beginning into the JS Console.)
 */
 if(window.location.hostname!=`portal.mcpsmd.org`){alert(`This only works on portal.mcpsmd.org after logging in.`);}
 document.head.innerHTML=`<title>PowerSchool 2.0</title><style>body{font-family:Helvetica;}table,th,td {text-align:center;border:1px solid black;border-collapse:collapse;}a{color:black;}</style>`;

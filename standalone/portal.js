@@ -13,19 +13,51 @@ let m;
 let schoolId;
 const currentTerm = `MP3` // Temporary solution
 overallClick = function(secnum,idnum,schoolnum,mpnum) {
+    document.getElementById(`name`).innerHTML = `Course Details for ` + student0;
+    document.getElementById(`gradeTable`).innerHTML = `<table id="gradeTable"><tr><td><strong><span class="courses">Category</span></strong></td><td><strong><span class="courses">Weight</span></strong></td><td><strong><span class="courses">Points/Max Pts.</span></strong></td><td><strong><span class="courses">Percent</span></strong></td><td><strong><span class="courses">Letter Grade</span></strong></td></tr></table>`;
     if(typeof window[mpnum+secnum]==`undefined`) {
       let assignmentReq = new XMLHttpRequest();
       let prior = ``;
       if(mpnum!=currentTerm){prior=`_prior`;}
       assignmentReq.open(`GET`, `https://portal.mcpsmd.org/guardian/prefs/assignmentGrade_CategoryDetail`+prior+`.json?secid=`+secnum+`&student_number=`+idnum+`&schoolid=`+schoolnum+`&termid=`+mpnum);
-      assignmentReq.onreadystatechange = function() {
-        console.log(assignmentReq.responseText);
+      assignmentReq.onreadystatechange = function() { if(this.readyState == 4 && this.status == 200 && assignmentReq.responseText/*||typeof window[mpnum+secnum+`c`]==`undefined`*/){
         eval(mpnum+secnum+`=JSON.parse(assignmentReq.responseText);`);
+        let mobjl = Object.keys(window[mpnum+secnum]).length;
+        let n;
+        for(n=0;n<mobjl+1,typeof window[mpnum+secnum][n].Description!=`undefined`;n++) {
+          let table = document.getElementById(`gradeTable`);
+          let row = table.insertRow(1);
+          let cell1 = row.insertCell(0);
+          let cell2 = row.insertCell(1);
+          let cell3 = row.insertCell(2);
+          let cell4 = row.insertCell(3);
+          let cell5 = row.insertCell(4);
+          cell1.innerHTML = window[mpnum+secnum][n].Description;
+          cell2.innerHTML = window[mpnum+secnum][n].Weight;
+          cell3.innerHTML = window[mpnum+secnum][n].PointsEarned+`/`+window[mpnum+secnum][n].PointsPossible;
+          cell4.innerHTML = window[mpnum+secnum][n].Percent;
+          cell5.innerHTML = window[mpnum+secnum][n].CategoryGrade;
+        }
+      }}
+        assignmentReq.send();
+      } else {
+        let mobjl = Object.keys(window[mpnum+secnum]).length;
+        let n;
+        for(n=0;n<mobjl+1,typeof window[mpnum+secnum][n].Description!=`undefined`;n++) {
+          let table = document.getElementById(`gradeTable`);
+          let row = table.insertRow(1);
+          let cell1 = row.insertCell(0);
+          let cell2 = row.insertCell(1);
+          let cell3 = row.insertCell(2);
+          let cell4 = row.insertCell(3);
+          let cell5 = row.insertCell(4);
+          cell1.innerHTML = window[mpnum+secnum][n].Description;
+          cell2.innerHTML = window[mpnum+secnum][n].Weight;
+          cell3.innerHTML = window[mpnum+secnum][n].PointsEarned+`/`+window[mpnum+secnum][n].PointsPossible;
+          cell4.innerHTML = window[mpnum+secnum][n].Percent;
+          cell5.innerHTML = window[mpnum+secnum][n].CategoryGrade;
+        }
       }
-      assignmentReq.send();
-    } else {
-      
-    }
 }
 let updateOverallGrades = function() {
   if (window[`termid`+m] == document.getElementById(`mp`).value) {
@@ -78,10 +110,6 @@ document.getElementById(`mp`).onchange = function() {
     let index = this.selectedIndex;
     let mpInput = this.children[index].value.trim();
     let grades = document.getElementById(`gradeTable`).children[0];
-    /*while(grades.children.length > 1)
-    {
-      grades.removeChild(grades.children[1]);
-    } */
     document.getElementById(`gradeTable`).innerHTML = `<table id="gradeTable"><tr><td><strong><span class="courses">Course</span></strong></td><td><strong><span class="courses">Overall Grade</span></strong></td></tr></table>`;
     for (m;m>-1;m--) {
       updateOverallGrades();
